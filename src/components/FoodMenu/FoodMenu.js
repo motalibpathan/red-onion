@@ -1,22 +1,20 @@
 import React, { useEffect, useState } from "react";
 import Food from "../Food/Food";
+import useFoods from "../hooks/useFoods";
 
 const FoodMenu = () => {
-  const [allFoods, setAllFoods] = useState([]);
+  const [allFoods] = useFoods([]);
   const [foods, setFoods] = useState([]);
   const menuItems = ["Breakfast", "Lunch", "Dinner"];
 
   useEffect(() => {
-    fetch("fakeData.json")
-      .then((res) => res.json())
-      .then((data) => {
-        setAllFoods(data);
-        const filteredFood = data.filter(
-          (food) => food.category === "Breakfast"
-        );
-        setFoods(filteredFood);
-      });
-  }, []);
+    const filteredFood = allFoods?.filter(
+      (food) => food.category === "Breakfast"
+    );
+    setFoods(filteredFood);
+
+    return () => {};
+  }, [allFoods]);
 
   const handleFilterFood = (category) => {
     const filteredFood = allFoods.filter((food) => food.category === category);
@@ -45,7 +43,7 @@ const FoodMenu = () => {
       </div>
       <div className="flex justify-center my-10">
         <button className=" px-7 py-3 bg-red rounded-md font-bold text-white hover:border-2 border-2 border-red hover:bg-white hover:text-red duration-500">
-          Checkout Your Food
+          See More
         </button>
       </div>
     </div>

@@ -26,10 +26,10 @@ const SignUp = () => {
       await createUserWithEmailAndPassword(email, password);
       await updateProfile({ displayName: name });
       navigate("/");
-      console.log(user);
     } else {
       toast.error("Password and confirmPassword does not matched");
     }
+    console.log(user);
   };
 
   return (

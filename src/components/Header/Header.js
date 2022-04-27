@@ -1,11 +1,14 @@
 import { signOut } from "firebase/auth";
-import React from "react";
+import React, { useContext } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { Link } from "react-router-dom";
+import { CartContext } from "../../App";
 import auth from "../../firebase.init";
 
 const Header = () => {
   const [user] = useAuthState(auth);
+  const { cart } = useContext(CartContext);
+  const cartTotal = cart.reduce((prev, curr) => prev + curr.quantity, 0);
   return (
     <div className="md:container p-7 flex justify-between mx-auto">
       <div>
@@ -14,7 +17,12 @@ const Header = () => {
         </Link>
       </div>
       <nav className="flex space-x-10 items-center font-bold">
-        <Link to={"/cart"}>{cart}</Link>
+        <Link to={"/cart"}>
+          <span className="ml-3 -mt-5 rounded-full text-white absolute bg-red px-2 inline-block">
+            {cartTotal}
+          </span>
+          {cartSvg}
+        </Link>
         {!user ? (
           <>
             <Link to={"/login"}>Login</Link>
@@ -45,7 +53,7 @@ const Header = () => {
 
 export default Header;
 
-const cart = (
+const cartSvg = (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     className="h-6 w-6"

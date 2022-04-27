@@ -1,33 +1,84 @@
-import React, { useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import useFoods from "../hooks/useFoods";
+import { CartContext } from "../../App";
+import { addToLocalStorage } from "../../utilities/utilities";
+import Header from "../Header/Header";
 
 const FoodDetails = () => {
   const { id } = useParams();
-  const [allFoods] = useFoods([]);
-
-  const food = allFoods.find((food) => food.id === parseInt(id)) || {};
-
-  const { img, name, desc, price } = food;
+  const [quantity, setQuantity] = useState(1);
+  const [food, setFood] = useState({});
+  const { cart, setCart } = useContext(CartContext);
 
   useEffect(() => {
-    console.log("Use effect called");
-  }, [allFoods, id]);
+    fetch(`${process.env.REACT_APP_API_DOMAIN}/food/${id}`)
+      .then((res) => res.json())
+      .then((data) => setFood(data));
+  }, [id]);
+
+  const { img, name, description, price } = food;
+
+  const handleQuantity = (isIncrease) => {
+    if (isIncrease && quantity > 0) {
+      setQuantity(quantity + 1);
+    }
+    if (!isIncrease && quantity > 1) {
+      setQuantity(quantity - 1);
+    }
+  };
+
+  const handleAddToCart = (food) => {
+    const selectedFood = cart.find((f) => f._id === food._id);
+
+    if (selectedFood) {
+      selectedFood.quantity = selectedFood.quantity + quantity;
+      const filterCart = cart.filter((f) => f._id !== food._id);
+      setCart([...filterCart, selectedFood]);
+      addToLocalStorage(selectedFood._id, quantity);
+    } else {
+      food.quantity = quantity;
+      setCart([...cart, food]);
+      addToLocalStorage(food._id, quantity);
+    }
+  };
 
   return (
-    <div className="md:w-4/6 mx-auto p-5 ">
-      <div className="flex items-center">
-        <div>
-          <h1 className="text-6xl my-2">{name}</h1>
-          <p>{desc}</p>
-          <p className="font-bold text-2xl">${price}</p>
-          <button className="mt-2 px-6 py-2 bg-red rounded-full font-bold text-white hover:border-2 border-2 border-red hover:bg-white hover:text-red duration-500">
-            {carSvg} Add
-          </button>
+    <>
+      <Header />
+      <div className="md:w-4/6 mx-auto p-5 ">
+        <div className="flex items-center min-h-[600px]">
+          <div>
+            <h1 className="text-6xl my-2">{name}</h1>
+            <p className="w-4/6 my-5">{description}</p>
+            <div className="flex items-center">
+              <p className="font-bold text-4xl mr-3">${price}</p>
+              <div className="rounded-full border-2 inline-block font-bold text-xl">
+                <button
+                  onClick={() => handleQuantity(false)}
+                  className="px-5 mr-3 text-2xl"
+                >
+                  --{" "}
+                </button>
+                <span>{quantity}</span>
+                <button
+                  onClick={() => handleQuantity(true)}
+                  className="text-red px-5 py-3 ml-3 text-2xl"
+                >
+                  +{" "}
+                </button>
+              </div>
+            </div>
+            <button
+              onClick={() => handleAddToCart(food)}
+              className="mt-4 px-7 py-3 bg-red rounded-full font-bold text-white hover:border-2 border-2 border-red hover:bg-white hover:text-red duration-500"
+            >
+              {carSvg} Add
+            </button>
+          </div>
+          <img width={"500"} className="mx-auto" src={img} alt="" />
         </div>
-        <img width={"400"} className="mx-auto" src={img} alt="" />
       </div>
-    </div>
+    </>
   );
 };
 
@@ -36,7 +87,7 @@ export default FoodDetails;
 const carSvg = (
   <svg
     xmlns="http://www.w3.org/2000/svg"
-    className="inline h-6 w-6"
+    className="inline h-6 w-6 mr-3"
     fill="none"
     viewBox="0 0 24 24"
     stroke="currentColor"

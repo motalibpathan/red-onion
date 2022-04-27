@@ -1,11 +1,13 @@
 import React from "react";
 import AboutUs from "../AboutUs/AboutUs";
 import FoodMenu from "../FoodMenu/FoodMenu";
+import Header from "../Header/Header";
 import "./Home.css";
 
 const Home = () => {
   return (
     <>
+      <Header />
       <div
         style={{ backgroundImage: "url(images/bannerbackground.png)" }}
         className="header-bg flex justify-center items-center"

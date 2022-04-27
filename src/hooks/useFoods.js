@@ -3,9 +3,7 @@ import { useEffect, useState } from "react";
 const useFoods = () => {
   const [allFoods, setAllFoods] = useState([]);
   useEffect(() => {
-    fetch(
-      "https://raw.githubusercontent.com/motalibpathan/red-onion/main/public/fakeData.json"
-    )
+    fetch(`${process.env.REACT_APP_API_DOMAIN}/food`)
       .then((res) => res.json())
       .then((data) => setAllFoods(data));
   }, []);
@@ -14,3 +12,5 @@ const useFoods = () => {
 };
 
 export default useFoods;
+
+//"https://raw.githubusercontent.com/motalibpathan/red-onion/main/public/fakeData.json"

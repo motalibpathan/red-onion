@@ -3,10 +3,10 @@ import { useNavigate } from "react-router-dom";
 
 const Food = ({ food }) => {
   const navigate = useNavigate();
-  const { id, img, name, desc, price } = food;
+  const { _id, img, name, desc, price } = food;
   return (
     <div
-      onClick={() => navigate(`/food/${id}`)}
+      onClick={() => navigate(`/food/${_id}`)}
       className="w-full text-center hover:shadow-2xl p-5 rounded-lg"
     >
       <img width={"200"} className="mx-auto" src={img} alt="" />

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
+import useFoods from "../../hooks/useFoods";
 import Food from "../Food/Food";
-import useFoods from "../hooks/useFoods";
 
 const FoodMenu = () => {
   const [allFoods] = useFoods([]);
@@ -38,7 +38,7 @@ const FoodMenu = () => {
       </ul>
       <div className="grid grid-cols-3 gap-14">
         {foods.map((food) => (
-          <Food key={food.id} food={food} />
+          <Food key={food._id} food={food} />
         ))}
       </div>
       <div className="flex justify-center my-10">

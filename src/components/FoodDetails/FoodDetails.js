@@ -45,39 +45,44 @@ const FoodDetails = () => {
   return (
     <>
       <Header />
-      <div className="md:w-4/6 mx-auto p-5 ">
-        <div className="flex items-center min-h-[600px]">
-          <div>
-            <h1 className="text-6xl my-2">{name}</h1>
-            <p className="w-4/6 my-5">{description}</p>
-            <div className="flex items-center">
-              <p className="font-bold text-4xl mr-3">${price}</p>
-              <div className="rounded-full border-2 inline-block font-bold text-xl">
-                <button
-                  onClick={() => handleQuantity(false)}
-                  className="px-5 mr-3 text-2xl"
-                >
-                  --{" "}
-                </button>
-                <span>{quantity}</span>
-                <button
-                  onClick={() => handleQuantity(true)}
-                  className="text-red px-5 py-3 ml-3 text-2xl"
-                >
-                  +{" "}
-                </button>
+      {food.name && (
+        <div className="md:w-4/6 mx-auto p-5 ">
+          <div className="flex items-center min-h-[600px]">
+            <div>
+              <h1 className="text-6xl my-2">{name}</h1>
+              <p className="w-4/6 my-5">{description}</p>
+              <div className="flex items-center">
+                <p className="font-bold text-4xl mr-3">${price}</p>
+                <div className="rounded-full border-2 inline-block font-bold text-xl">
+                  <button
+                    onClick={() => handleQuantity(false)}
+                    className="px-5 mr-3 text-2xl"
+                  >
+                    --{" "}
+                  </button>
+                  <span>{quantity}</span>
+                  <button
+                    onClick={() => handleQuantity(true)}
+                    className="text-red px-5 py-3 ml-3 text-2xl"
+                  >
+                    +{" "}
+                  </button>
+                </div>
               </div>
+              <button
+                onClick={() => handleAddToCart(food)}
+                className="mt-4 px-7 py-3 bg-red rounded-full font-bold text-white hover:border-2 border-2 border-red hover:bg-white hover:text-red duration-500"
+              >
+                {carSvg} Add
+              </button>
             </div>
-            <button
-              onClick={() => handleAddToCart(food)}
-              className="mt-4 px-7 py-3 bg-red rounded-full font-bold text-white hover:border-2 border-2 border-red hover:bg-white hover:text-red duration-500"
-            >
-              {carSvg} Add
-            </button>
+            <img width={"500"} className="mx-auto" src={img} alt="" />
           </div>
-          <img width={"500"} className="mx-auto" src={img} alt="" />
         </div>
-      </div>
+      )}
+      {!food.name && (
+        <h1 className="h-96 text-center text-4xl">No product found</h1>
+      )}
     </>
   );
 };

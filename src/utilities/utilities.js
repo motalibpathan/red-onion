@@ -29,3 +29,7 @@ export function removeFromLocalStorage(id) {
     localStorage.setItem("shopping-cart", JSON.stringify(shoppingCart));
   }
 }
+
+export function removeAllFromLocalStorage() {
+  localStorage.removeItem("shopping-cart");
+}

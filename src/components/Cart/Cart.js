@@ -97,8 +97,8 @@ const Cart = () => {
   return (
     <div>
       <Header />
-      <div className="md:container mx-auto p-5 mt-14 flex ">
-        <div className="w-1/2 min-h-screen">
+      <div className="md:container mx-auto p-5 lg:mt-14 mt-3 flex lg:flex-row flex-col">
+        <div className="w-full lg:w-1/2 lg:min-h-screen">
           <h1 className="text-xl font-bold mb-3">Edit Delivery Details</h1>
           <hr />
           {!user && (
@@ -162,8 +162,8 @@ const Cart = () => {
             />
           </form>
         </div>
-        <div className="w-1/2 mt-5">
-          <div className="w-4/5 ml-auto">
+        <div className="w-full lg:w-1/2 mt-5">
+          <div className="w-full lg:w-4/5 ml-auto">
             <h1>
               From:{" "}
               <span className="font-bold">Gulshan Plaza Restaurant GPR</span>
@@ -178,7 +178,7 @@ const Cart = () => {
               handleQuantity={handleQuantity}
             />
           ))}
-          <div className="w-4/5 ml-auto">
+          <div className="w-full lg:w-4/5 ml-auto">
             <h1 className="flex justify-between my-2">
               <span>
                 Subtotal --{" "}
@@ -234,7 +234,7 @@ export default Cart;
 const CartItem = ({ food, handleQuantity }) => {
   const { _id, img, name, price, quantity } = food;
   return (
-    <div className="w-4/5 bg-gray-100 p-5 my-4 flex items-center ml-auto rounded-md">
+    <div className="w-full lg:w-4/5 bg-gray-100 p-5 my-4 flex items-center ml-auto rounded-md">
       <div className=" mr-4">
         <img width={80} src={img} alt="" />
       </div>

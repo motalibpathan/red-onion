@@ -7,7 +7,7 @@ const Food = ({ food }) => {
   return (
     <div
       onClick={() => navigate(`/food/${_id}`)}
-      className="w-full text-center hover:shadow-2xl p-5 rounded-lg"
+      className="w-full text-center hover:shadow-2xl p-5 rounded-lg md:shadow-none shadow-xl cursor-pointer"
     >
       <img width={"200"} className="mx-auto" src={img} alt="" />
       <h1 className="font-bold my-2">{name}</h1>

@@ -47,10 +47,10 @@ const FoodDetails = () => {
       <Header />
       {food.name && (
         <div className="md:w-4/6 mx-auto p-5 ">
-          <div className="flex items-center min-h-[600px]">
-            <div>
-              <h1 className="text-6xl my-2">{name}</h1>
-              <p className="w-4/6 my-5">{description}</p>
+          <div className="flex md:flex-row flex-col items-center min-h-[600px]">
+            <div className="md:order-1 order-3">
+              <h1 className="md:text-6xl text-4xl my-3">{name}</h1>
+              <p className="md:w-4/6 my-5">{description}</p>
               <div className="flex items-center">
                 <p className="font-bold text-4xl mr-3">${price}</p>
                 <div className="rounded-full border-2 inline-block font-bold text-xl">
@@ -76,7 +76,7 @@ const FoodDetails = () => {
                 {carSvg} Add
               </button>
             </div>
-            <img width={"500"} className="mx-auto" src={img} alt="" />
+            <img width={"500"} className="mx-auto order-2" src={img} alt="" />
           </div>
         </div>
       )}

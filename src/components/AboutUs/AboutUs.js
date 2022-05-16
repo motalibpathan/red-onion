@@ -29,13 +29,13 @@ const AboutUs = () => {
     <div className="md:container mx-auto p-5">
       <div className="mb-10">
         <h1 className="text-4xl my-7">Why you choose us</h1>
-        <p className="w-1/3">
+        <p className="lg:w-1/3 w-full">
           Barhon waited twenty always repair in within we do. An delighted
           offending curiosity my is dashwoods at. Boy prosperous increasing
           surrounded.
         </p>
       </div>
-      <div className="flex gap-10">
+      <div className="md:flex md:space-x-10 md:space-y-0 space-y-10">
         {cardData.map((cardInfo) => (
           <Card key={cardInfo.id} cardInfo={cardInfo} />
         ))}

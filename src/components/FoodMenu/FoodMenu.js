@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import useFoods from "../../hooks/useFoods";
 import Food from "../Food/Food";
+import { loadingSvg } from "../Loading/Loading";
 
 const FoodMenu = () => {
-  const [allFoods] = useFoods([]);
+  const [allFoods, , isFoodLoading] = useFoods([]);
   const [foods, setFoods] = useState([]);
   const menuItems = ["Breakfast", "Lunch", "Dinner"];
 
@@ -12,9 +13,15 @@ const FoodMenu = () => {
       (food) => food.category === "Breakfast"
     );
     setFoods(filteredFood);
-
-    return () => {};
   }, [allFoods]);
+
+  if (isFoodLoading) {
+    return (
+      <div className="w-full h-[300px] flex justify-center items-center">
+        {loadingSvg}
+      </div>
+    );
+  }
 
   const handleFilterFood = (category) => {
     const filteredFood = allFoods.filter((food) => food.category === category);

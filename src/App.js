@@ -7,6 +7,8 @@ import Cart from "./components/Cart/Cart";
 import FoodDetails from "./components/FoodDetails/FoodDetails";
 import Footer from "./components/Footer/Footer";
 import Home from "./components/Home/Home";
+import Orders from "./components/Orders/Orders";
+import RequireAuth from "./components/RequireAuth/RequireAuth";
 import SignUp from "./components/SignUp/SignUp";
 import useCart from "./hooks/useCart";
 
@@ -24,6 +26,14 @@ function App() {
           <Route path="/register" element={<SignUp />} />
           <Route path="/food/:id" element={<FoodDetails />} />
           <Route path="/cart" element={<Cart />} />
+          <Route
+            path="/orders"
+            element={
+              <RequireAuth>
+                <Orders />
+              </RequireAuth>
+            }
+          />
         </Routes>
         <Footer />
         <ToastContainer />

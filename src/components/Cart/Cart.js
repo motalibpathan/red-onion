@@ -6,6 +6,7 @@ import { CartContext } from "../../App";
 import auth from "../../firebase.init";
 import {
   addToLocalStorage,
+  getShoredCart,
   removeAllFromLocalStorage,
 } from "../../utilities/utilities";
 import Header from "../Header/Header";
@@ -56,14 +57,18 @@ const Cart = () => {
     const addressTwo = e.target["address2"].value;
     const businessName = e.target["businessName"].value;
     const instruction = e.target["instruction"].value;
+    const storedCart = getShoredCart();
+    const keys = Object.keys(storedCart);
+
     const info = {
+      purchasedDate: new Date(),
       email,
       deliveryType,
       addressOne,
       addressTwo,
       businessName,
       instruction,
-      orderedFood: cart,
+      orderedFood: keys,
     };
     if (cart.length > 0) {
       setDeliveryInfo(info);

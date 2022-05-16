@@ -6,9 +6,7 @@ const useCart = () => {
 
   useEffect(() => {
     const storedCart = getShoredCart();
-
     const savedCart = [];
-
     const keys = Object.keys(storedCart);
 
     fetch(`${process.env.REACT_APP_API_DOMAIN}/foodByKeys`, {
